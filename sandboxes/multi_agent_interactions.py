@@ -65,9 +65,9 @@ Fc = polar_to_cartesian(1, np.pi/4)
 
 F_net = Fa + Fb + Fc
 
-Fi_ab = new_def2(Fa,Fb)
-Fi_ac = new_def2(Fa,Fc)
-Fi_bc = new_def(Fb,Fc)
+Fi_ab = perpendicular_projection_bisection(Fa,Fb)
+Fi_ac = perpendicular_projection_bisection(Fa,Fc)
+Fi_bc = perpendicular_projection_bisection(Fb,Fc)
 
 Fi_net = Fi_ab + Fi_ac + Fi_bc
 
