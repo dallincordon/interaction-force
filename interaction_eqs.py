@@ -4,7 +4,7 @@ sys.path.append('/Users/cordond/tools')
 import numpy as np
 import itertools
 import pandas as pd
-from vector_utils import *
+from tools.vector_utils import *
 
 # return the minimum of two opposing forces
 def literature_def(Fa,Fb,Fg):
