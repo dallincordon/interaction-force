@@ -10,6 +10,9 @@ from tools.vector_utils import *
 def literature_def(Fa,Fb,Fg):
     '''
     Used by:
+    Issues:
+        - only accounts for 1D situations (doesn't account for partial opposition)
+        - doesn't account for more than two agents
     '''
     if np.sign(Fa) != np.sign(Fb):
         Fi = min(abs(Fa),abs(Fb))
@@ -19,7 +22,9 @@ def literature_def(Fa,Fb,Fg):
 
 def minFsinTheta(Fa,Fb):
     '''
-    Defined by us
+    Proposed by us as a proper mapping between zero (forces aligned) and the minimum of the two forces (forces opposing)
+    Issues:
+        - gives a correct looking magnitude but not the correct direction (simply scales the smaller force by sin(theta/2))
     '''
     # get the angle between the two force vectors:
     theta = angle_between(Fa,Fb)
@@ -51,6 +56,8 @@ def perpendicular_projection_bisection(Fa,Fb):
 def perpendicular_projection_net(Fa,Fb):
     '''
     Returns the perpendicular projection of the smaller force onto the net force
+    Issues:
+        - when Fa and Fb are equal and opposite, Fi = 0
     '''
     F_net = Fa + Fb
     Fa_magnitude = get_magnitude(Fa)
@@ -66,6 +73,12 @@ def perpendicular_projection_net(Fa,Fb):
 
 
 def literature_def_alpha(Fa,Fb,Fg,alpha):
+    '''
+    Referenced by Noohi et al.
+    Issues:
+        - doesn't account for more than two agents
+        - assumes some measure of how much each agent contributes to the interaction force (alpha)
+    '''
     Fi = (1-alpha)*Fa + alpha*Fb
     return Fi
 
@@ -82,7 +95,11 @@ def Fb_is_leader(Fa,Fb,Fg):
 # return the minimum of two opposing forces after removing gravity from it's opposing force
 def spencers(Fa,Fb,Fg):
     '''
-    Used by:
+    Used by Spencer
+    Issues:
+        - doesn't account for more than two agents
+        - doesn't account for partial opposition
+        - adding gravity causes some weird behaviors (specify)
     '''
     if np.sign(Fa) != np.sign(Fb):
         if np.sign(Fa) != np.sign(Fg):
@@ -98,6 +115,11 @@ def spencers(Fa,Fb,Fg):
 
 # return the minimum of two opposing forces after removing gravity from it's matching force
 def inv_spencers(Fa,Fb,Fg):
+    '''
+    Issues:
+        - doesn't account for more than two agents
+        - doesn't account for partial opposition
+    '''
     if np.sign(Fa) != np.sign(Fb):
         if np.sign(Fa) == np.sign(Fg):
             Fa = Fa + Fg
@@ -110,6 +132,11 @@ def inv_spencers(Fa,Fb,Fg):
 
 # return the minimum of two opposing forces after adding gravity to the leaders force
 def leader_follower(Fa,Fb,Fg):
+    '''
+    Issues:
+        - doesn't account for more than two agents
+        - doesn't account for partial opposition
+    '''
     Fa = Fa + Fg
     
     if np.sign(Fa) != np.sign(Fb):
