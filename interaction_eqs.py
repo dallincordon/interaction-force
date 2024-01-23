@@ -2,8 +2,6 @@
 import sys
 sys.path.append('/Users/cordond/tools')
 import numpy as np
-import itertools
-import pandas as pd
 from tools.vector_utils import *
 
 # return the minimum of two opposing forces
