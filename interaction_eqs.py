@@ -51,6 +51,22 @@ def perpendicular_projection_bisection(Fa,Fb):
         Fi = get_perpendicular_component(Fb,bisecting_vector)
     return Fi
 
+def perpendicular_projection_bisection2(Fa,Fb):
+    '''
+    Returns the perpendicular projection of the larger force onto the bisector of the two vectors
+        (similar to min(Fa,Fb)*sin(theta/2))
+    '''
+    bisecting_vector = get_bisector(Fa,Fb)
+    Fa_magnitude = get_magnitude(Fa)
+    Fb_magnitude = get_magnitude(Fb)
+
+    # Find the smaller vector
+    if Fa_magnitude < Fb_magnitude:
+        Fi = get_perpendicular_component(Fb,bisecting_vector)
+    else:
+        Fi = get_perpendicular_component(Fa,bisecting_vector)
+    return Fi
+
 def perpendicular_projection_net(Fa,Fb):
     '''
     Returns the perpendicular projection of the smaller force onto the net force
