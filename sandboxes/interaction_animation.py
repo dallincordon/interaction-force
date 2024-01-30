@@ -26,13 +26,15 @@ def animate(frame_number):
     angle = np.radians(frame_number)
     Fb.set_UVC(np.cos(angle), np.sin(angle))
 
+    # Update the net force
     sum_x = Fa.U + Fb.U
     sum_y = Fa.V + Fb.V
     Fnet.set_UVC(sum_x, sum_y)
 
+    # Update the interaction force
     Fa_vector = np.array([Fa.U[0], Fa.V[0]])
     Fb_vector = np.array([Fb.U[0], Fb.V[0]])
-    Fi_vector = perpendicular_projection_net(Fa_vector, Fb_vector)
+    Fi_vector = perpendicular_projection_bisection(Fa_vector, Fb_vector)
     Fi.set_UVC(Fi_vector[0], Fi_vector[1])
 
     return [Fa,Fb,Fnet,Fi]
@@ -40,8 +42,8 @@ def animate(frame_number):
 anim = animation.FuncAnimation(fig, animate, init_func=init, frames=360, interval=20, blit=True)
 plt.legend()
 
-# uncomment this to turn the animation into a gif (takes a while to run):
-path = '/Users/cordond/Desktop/perpendicular_projection_net.gif'
-anim.save(path, writer='imagemagick', fps=30)
+# # uncomment below to turn the animation into a gif (takes a while to run):
+# path = '/Users/cordond/Desktop/test.gif'
+# anim.save(path, writer='imagemagick', fps=30)
 
 plt.show()
