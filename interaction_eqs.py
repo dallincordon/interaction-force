@@ -5,7 +5,7 @@ import numpy as np
 from tools.vector_utils import *
 
 # return the minimum of two opposing forces
-def literature_def(Fa,Fb,Fg):
+def literature_def(Fa,Fb):
     '''
     Used by:
     Issues:
@@ -60,7 +60,7 @@ def perpendicular_projection_bisection2(Fa,Fb):
     Fa_magnitude = get_magnitude(Fa)
     Fb_magnitude = get_magnitude(Fb)
 
-    # Find the smaller vector
+    # Find the bigger vector
     if Fa_magnitude < Fb_magnitude:
         Fi = get_perpendicular_component(Fb,bisecting_vector)
     else:
@@ -84,6 +84,18 @@ def perpendicular_projection_net(Fa,Fb):
         Fi = get_perpendicular_component(Fb,F_net)
     return Fi
 
+def counteract_net(Fa,Fb):
+    F_net = Fa + Fb
+    if get_magnitude(Fa) < get_magnitude(Fb):
+        F_min = Fa
+    else:
+        F_min = Fb
+    theta = angle_between(F_min, F_net)
+    if theta > np.pi/2:
+        Fi = F_min
+    else:
+        Fi = get_perpendicular_component(F_min,F_net)
+    return Fi
 
 
 def literature_def_alpha(Fa,Fb,Fg,alpha):
