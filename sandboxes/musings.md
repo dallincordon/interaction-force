@@ -76,3 +76,5 @@ Now, if this situation holds true, the interaction force should looks something 
 When we consider the previous issue with the bisection method (wherein each force subtracted by the interaction force left you with forces that could, in and of themselves, have an interaction force with each other), this method (I'll call "counteraction") performs much more intuitively:
 
 <img src="img/counteract_subtract.gif" width="500" align="center">
+
+Now, I don't have any deal breaking issues with this, but I do have a few concerns that cause me to pause. The magnitude of the interaction force is fairly smooth when graphed out, but the directionality of it feels nonlinear. With that said, I do like that the ramping up phase of the interaction force is sort of mirrored on the other side forming a sort of lens.
